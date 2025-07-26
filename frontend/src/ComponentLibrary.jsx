@@ -430,6 +430,8 @@ const ComponentLibrary = () => {
               change={metric.change}
               icon={metric.icon}
               trend={metric.trend}
+              category={metric.category}
+              sparklineData={metric.sparklineData}
             />
           ))}
         </div>
@@ -440,6 +442,41 @@ const ComponentLibrary = () => {
   change="+12.5%"
   icon="👥"
   trend="up"
+  category="success"
+  sparklineData={[8500, 9200, 8800, 10200, 11500, 12547]}
+/>`}
+        </pre>
+      </div>
+
+      {/* Stats Cards */}
+      <div style={{ marginBottom: '48px' }}>
+        <h3 style={{ fontSize: '1.5rem', color: 'var(--color-text)', marginBottom: '24px', textAlign: 'center' }}>Cartes de Statistiques</h3>
+        <div style={gridStyles}>
+          {statsData.map((stat, index) => (
+            <StatsCard
+              key={index}
+              title={stat.title}
+              value={stat.value}
+              previousValue={stat.previousValue}
+              icon={stat.icon}
+              color={stat.color}
+              format={stat.format}
+              subtitle={stat.subtitle}
+              animated={true}
+              showTrend={true}
+            />
+          ))}
+        </div>
+        <pre style={codeBlockStyles}>
+{`<StatsCard
+  title="Revenus Totaux"
+  value={89650}
+  previousValue={82340}
+  icon="💰"
+  color="success"
+  format="currency"
+  animated={true}
+  showTrend={true}
 />`}
         </pre>
       </div>
