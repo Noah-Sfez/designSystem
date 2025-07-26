@@ -118,8 +118,10 @@ export const tableData = [
 
 export const dropdownItems = [
   { label: 'Profil', icon: '👤' },
-  { label: 'Paramètres', icon: '⚙️' },
-  { label: 'Aide', icon: '❓' },
+  { type: 'separator' },
+  { label: 'Paramètres', icon: '⚙️', shortcut: '⌘,' },
+  { label: 'Aide', icon: '❓', shortcut: '⌘?' },
+  { type: 'separator' },
   { label: 'Déconnexion', icon: '🚪' }
 ];
 
