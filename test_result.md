@@ -149,3 +149,5 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Starting conversion of all yarn commands to npm in deployment configuration files"
+  - agent: "main"
+    message: "Successfully completed conversion from yarn to npm. Updated all configuration files, documentation, and supervisor config. Application now running with npm and package-lock.json instead of yarn.lock"
