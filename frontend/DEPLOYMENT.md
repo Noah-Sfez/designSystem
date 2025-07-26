@@ -10,7 +10,7 @@ git clone votre-repo
 cd react-glass-components
 
 # Installer les dépendances de build
-yarn add -D @rollup/plugin-node-resolve @rollup/plugin-commonjs @rollup/plugin-typescript rollup rollup-plugin-peer-deps-external rollup-plugin-postcss typescript gh-pages
+npm install -D @rollup/plugin-node-resolve @rollup/plugin-commonjs @rollup/plugin-typescript rollup rollup-plugin-peer-deps-external rollup-plugin-postcss typescript gh-pages
 ```
 
 ### 2. Configuration du repository GitHub
