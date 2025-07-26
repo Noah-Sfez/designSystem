@@ -9,12 +9,17 @@ import { GlassCard } from './components/ui/GlassCard';
 import { GlassModal } from './components/ui/GlassModal';
 import { GlassDropdown } from './components/ui/GlassDropdown';
 import { ThemeSwitcher } from './components/ui/ThemeSwitcher';
+import { ProgressBar } from './components/ui/ProgressBar';
+import { Badge } from './components/ui/Badge';
 import { LoadingSpinner, PulseLoader, WaveLoader } from './components/loaders/LoadingSpinner';
 import { Dashboard } from './components/saas/Dashboard';
 import { MetricCard } from './components/saas/MetricCard';
+import { StatsCard } from './components/saas/StatsCard';
 import { DataTable } from './components/saas/DataTable';
 import { CollapsiblePanel } from './components/saas/CollapsiblePanel';
 import { Speedometer } from './components/saas/Speedometer';
+import { Timeline } from './components/saas/Timeline';
+import { UserProfileCard } from './components/saas/UserProfileCard';
 
 // Import mock data
 import { 
@@ -24,7 +29,11 @@ import {
   metricsData, 
   speedometerData, 
   panelData, 
-  tableColumns 
+  tableColumns,
+  statsData,
+  timelineData,
+  userProfileData,
+  progressData
 } from './mock/mockData';
 
 const ComponentLibrary = () => {
