@@ -8,7 +8,7 @@ console.log('📚 Déploiement de la documentation...');
 // Construire la documentation
 console.log('🔨 Construction de la documentation...');
 try {
-  execSync('yarn build', { stdio: 'inherit' });
+  execSync('npm run build', { stdio: 'inherit' });
   console.log('✅ Documentation construite');
 } catch (error) {
   console.error('❌ Erreur lors de la construction:', error.message);
