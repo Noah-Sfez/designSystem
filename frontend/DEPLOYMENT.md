@@ -108,8 +108,6 @@ git push origin v1.0.0
 #### A. Installation
 ```bash
 npm install @votre-nom/react-glass-components
-# ou
-yarn add @votre-nom/react-glass-components
 ```
 
 #### B. Utilisation
