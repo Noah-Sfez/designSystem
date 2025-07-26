@@ -13,7 +13,9 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "test": "react-scripts test --watchAll=false",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx"
   },
   "keywords": [
     "react",
