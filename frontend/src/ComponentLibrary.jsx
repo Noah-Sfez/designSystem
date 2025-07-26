@@ -298,33 +298,30 @@ const ComponentLibrary = () => {
           </pre>
         </GlassCard>
 
-        {/* Progress Bars */}
+        {/* Toasts */}
         <GlassCard style={demoCardStyles}>
-          <h3 style={demoTitleStyles}>Barres de Progression</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', textAlign: 'left' }}>
-            {progressData.map((progress, index) => (
-              <ProgressBar
-                key={index}
-                label={progress.label}
-                value={progress.value}
-                color={progress.color}
-                size={progress.size}
-                striped={progress.striped}
-                animated={progress.animated}
-                glowing={progress.glowing}
-                showPercentage={true}
-              />
-            ))}
+          <h3 style={demoTitleStyles}>Notifications</h3>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <GlassButton variant="primary" size="sm" onClick={() => handleToastDemo('success')}>
+              Succès
+            </GlassButton>
+            <GlassButton variant="secondary" size="sm" onClick={() => handleToastDemo('error')}>
+              Erreur
+            </GlassButton>
+            <GlassButton variant="accent" size="sm" onClick={() => handleToastDemo('warning')}>
+              Attention
+            </GlassButton>
+            <GlassButton variant="ghost" size="sm" onClick={() => handleToastDemo('info')}>
+              Info
+            </GlassButton>
           </div>
           <pre style={codeBlockStyles}>
-{`<ProgressBar 
-  label="Développement Frontend" 
-  value={87} 
-  color="primary" 
-  striped 
-  animated 
-  showPercentage 
-/>`}
+{`const { toast } = useToast();
+
+toast.success('Opération réussie', 'Message de succès');
+toast.error('Erreur détectée', 'Message d\'erreur');
+toast.warning('Attention', 'Message d\'avertissement');
+toast.info('Information', 'Message d\'information');`}
           </pre>
         </GlassCard>
       </div>
