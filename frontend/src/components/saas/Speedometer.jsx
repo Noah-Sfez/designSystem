@@ -17,9 +17,9 @@ export const Speedometer = ({
   const [animatedValue, setAnimatedValue] = useState(0);
 
   const sizes = {
-    sm: 150,
-    md: 200,
-    lg: 250
+    sm: 120,
+    md: 160,
+    lg: 200
   };
 
   const colors = {
@@ -36,8 +36,8 @@ export const Speedometer = ({
 
   useEffect(() => {
     if (animated) {
-      const duration = 2000;
-      const steps = 60;
+      const duration = 1500;
+      const steps = 30;
       const stepValue = value / steps;
       const stepDuration = duration / steps;
 
@@ -61,120 +61,130 @@ export const Speedometer = ({
   const percentage = Math.min(Math.max((animatedValue - min) / (max - min) * 100, 0), 100);
   const angle = (percentage / 100) * 180 - 90;
 
-  const speedometerStyles = {
-    width: speedometerSize,
-    height: speedometerSize / 2 + 40,
-    position: 'relative',
-    margin: '0 auto',
+  const containerStyles = {
+    padding: '24px',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    minHeight: '220px'
   };
 
-  const arcStyles = {
+  const speedometerStyles = {
+    width: speedometerSize,
+    height: speedometerSize / 2 + 20,
+    position: 'relative',
+    marginBottom: '20px'
+  };
+
+  const trackStyles = {
     width: speedometerSize,
     height: speedometerSize / 2,
-    border: `8px solid var(--color-border)`,
+    border: '4px solid rgba(255, 255, 255, 0.1)',
     borderBottom: 'none',
     borderRadius: `${speedometerSize / 2}px ${speedometerSize / 2}px 0 0`,
     position: 'relative',
     overflow: 'hidden'
   };
 
-  const progressArcStyles = {
-    width: speedometerSize - 16,
-    height: speedometerSize / 2 - 8,
-    border: `8px solid ${speedometerColor}`,
-    borderBottom: 'none',
-    borderRadius: `${(speedometerSize - 16) / 2}px ${(speedometerSize - 16) / 2}px 0 0`,
+  const fillStyles = {
     position: 'absolute',
-    top: '0',
-    left: '0',
-    clipPath: `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`,
-    transition: animated ? 'clip-path 0.3s ease' : 'none'
+    top: 0,
+    left: 0,
+    width: speedometerSize - 8,
+    height: speedometerSize / 2 - 4,
+    background: `conic-gradient(from -90deg, ${speedometerColor} 0deg, ${speedometerColor} ${percentage * 1.8}deg, transparent ${percentage * 1.8}deg)`,
+    borderRadius: `${(speedometerSize - 8) / 2}px ${(speedometerSize - 8) / 2}px 0 0`,
+    mask: `radial-gradient(circle at 50% 100%, transparent 30%, black 32%)`,
+    WebkitMask: `radial-gradient(circle at 50% 100%, transparent 30%, black 32%)`
   };
 
   const needleStyles = {
-    width: '4px',
-    height: speedometerSize / 2 - 20,
-    backgroundColor: speedometerColor,
+    width: '3px',
+    height: speedometerSize / 2 - 15,
+    backgroundColor: 'var(--color-text)',
     position: 'absolute',
-    bottom: '10px',
+    bottom: '0',
     left: '50%',
     transformOrigin: 'bottom center',
     transform: `translateX(-50%) rotate(${angle}deg)`,
-    transition: animated ? 'transform 0.3s ease' : 'none',
+    transition: animated ? 'transform 0.5s ease-out' : 'none',
     borderRadius: '2px',
-    boxShadow: `0 0 10px ${speedometerColor}50`
+    zIndex: 2
   };
 
   const centerDotStyles = {
-    width: '20px',
-    height: '20px',
-    backgroundColor: speedometerColor,
+    width: '12px',
+    height: '12px',
+    backgroundColor: 'var(--color-text)',
     borderRadius: '50%',
     position: 'absolute',
-    bottom: '5px',
+    bottom: '-6px',
     left: '50%',
     transform: 'translateX(-50%)',
-    boxShadow: `0 0 15px ${speedometerColor}40`
+    zIndex: 3
   };
 
   const labelStyles = {
-    marginTop: '1rem',
-    textAlign: 'center'
+    textAlign: 'center',
+    width: '100%'
   };
 
   const titleStyles = {
-    fontSize: '1.125rem',
-    fontWeight: '600',
+    fontSize: '1rem',
+    fontWeight: '500',
     color: 'var(--color-text)',
-    marginBottom: '0.5rem'
+    marginBottom: '8px',
+    opacity: 0.8
   };
 
   const valueStyles = {
-    fontSize: '2rem',
+    fontSize: '1.5rem',
     fontWeight: '700',
-    color: speedometerColor,
-    marginBottom: '0.25rem'
+    color: 'var(--color-text)',
+    display: 'flex',
+    alignItems: 'baseline',
+    justifyContent: 'center',
+    gap: '2px'
   };
 
   const unitStyles = {
     fontSize: '0.875rem',
-    color: 'var(--color-textMuted)'
+    color: 'var(--color-text)',
+    opacity: 0.6,
+    fontWeight: '500'
   };
 
-  const scaleStyles = {
+  const rangeStyles = {
     position: 'absolute',
-    bottom: '10px',
+    bottom: '-10px',
     left: '0',
     right: '0',
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '0 20px',
     fontSize: '0.75rem',
-    color: 'var(--color-textMuted)'
+    color: 'var(--color-text)',
+    opacity: 0.5,
+    padding: '0 8px'
   };
 
   return (
-    <GlassCard className={`speedometer ${className}`}>
+    <GlassCard style={containerStyles} className={`speedometer ${className}`}>
       <div style={speedometerStyles}>
-        <div style={arcStyles}>
-          <div style={progressArcStyles} />
+        <div style={trackStyles}>
+          <div style={fillStyles} />
           <div style={needleStyles} />
           <div style={centerDotStyles} />
-          <div style={scaleStyles}>
+          <div style={rangeStyles}>
             <span>{min}</span>
-            <span>{Math.round((min + max) / 2)}</span>
             <span>{max}</span>
           </div>
         </div>
-        <div style={labelStyles}>
-          <div style={titleStyles}>{title}</div>
-          <div style={valueStyles}>
-            {Math.round(animatedValue)}
-            <span style={unitStyles}>{unit}</span>
-          </div>
+      </div>
+      <div style={labelStyles}>
+        <div style={titleStyles}>{title}</div>
+        <div style={valueStyles}>
+          {Math.round(animatedValue)}
+          <span style={unitStyles}>{unit}</span>
         </div>
       </div>
     </GlassCard>

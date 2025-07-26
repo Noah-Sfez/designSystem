@@ -36,72 +36,97 @@ const ComponentLibrary = () => {
 
   const containerStyles = {
     minHeight: '100vh',
-    background: `linear-gradient(135deg, ${currentColors.background}, ${currentColors.surface})`,
-    padding: '2rem'
+    padding: '40px 20px',
+    backgroundImage: `
+      radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)
+    `
   };
 
   const headerStyles = {
     textAlign: 'center',
-    marginBottom: '3rem'
+    marginBottom: '48px',
+    maxWidth: '800px',
+    margin: '0 auto 48px auto'
   };
 
   const titleStyles = {
-    fontSize: '3rem',
+    fontSize: 'clamp(2rem, 5vw, 3.5rem)',
     fontWeight: '700',
-    background: `linear-gradient(135deg, ${currentColors.primary}, ${currentColors.secondary})`,
+    background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
-    marginBottom: '1rem'
+    marginBottom: '16px',
+    lineHeight: '1.2'
   };
 
   const subtitleStyles = {
-    fontSize: '1.25rem',
-    color: currentColors.textMuted,
-    marginBottom: '2rem'
+    fontSize: '1.125rem',
+    color: 'var(--color-text)',
+    marginBottom: '32px',
+    opacity: 0.8,
+    lineHeight: '1.6'
   };
 
   const navigationStyles = {
     display: 'flex',
     justifyContent: 'center',
-    gap: '1rem',
-    marginBottom: '3rem',
+    gap: '12px',
+    marginBottom: '48px',
     flexWrap: 'wrap'
   };
 
+  const contentStyles = {
+    maxWidth: '1200px',
+    margin: '0 auto'
+  };
+
   const sectionStyles = {
-    marginBottom: '4rem'
+    marginBottom: '64px'
   };
 
   const sectionTitleStyles = {
     fontSize: '2rem',
     fontWeight: '600',
-    color: currentColors.text,
-    marginBottom: '2rem',
+    color: 'var(--color-text)',
+    marginBottom: '32px',
     textAlign: 'center'
   };
 
   const gridStyles = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-    gap: '2rem',
-    marginBottom: '2rem'
+    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+    gap: '24px',
+    marginBottom: '32px'
   };
 
   const demoCardStyles = {
-    padding: '2rem',
-    textAlign: 'center'
+    padding: '32px',
+    textAlign: 'center',
+    minHeight: '200px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  };
+
+  const demoTitleStyles = {
+    fontSize: '1.125rem',
+    fontWeight: '600',
+    color: 'var(--color-text)',
+    marginBottom: '24px'
   };
 
   const codeBlockStyles = {
-    backgroundColor: currentColors.surface,
-    border: `1px solid ${currentColors.border}`,
-    borderRadius: 'var(--border-radius)',
-    padding: '1rem',
-    fontFamily: 'monospace',
-    fontSize: '0.875rem',
-    color: currentColors.text,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    borderRadius: '12px',
+    padding: '20px',
+    fontFamily: 'Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+    fontSize: '0.8125rem',
+    color: 'var(--color-text)',
     overflow: 'auto',
-    marginTop: '1rem'
+    marginTop: '20px',
+    lineHeight: '1.5'
   };
 
   const handleDropdownSelect = (item) => {
@@ -111,13 +136,13 @@ const ComponentLibrary = () => {
   const handleToastDemo = (type) => {
     switch (type) {
       case 'success':
-        toast.success('Succès !', 'Opération réalisée avec succès');
+        toast.success('Opération réussie', 'L\'action a été effectuée avec succès');
         break;
       case 'error':
-        toast.error('Erreur !', 'Une erreur s\'est produite');
+        toast.error('Erreur détectée', 'Une erreur inattendue s\'est produite');
         break;
       case 'warning':
-        toast.warning('Attention !', 'Veuillez vérifier vos données');
+        toast.warning('Attention requise', 'Veuillez vérifier les informations');
         break;
       default:
         toast.info('Information', 'Voici une notification d\'information');
@@ -138,24 +163,25 @@ const ComponentLibrary = () => {
       <div style={gridStyles}>
         {/* Buttons */}
         <GlassCard style={demoCardStyles}>
-          <h3 style={{ marginBottom: '1rem', color: currentColors.text }}>Boutons</h3>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <GlassButton variant="primary">Primaire</GlassButton>
-            <GlassButton variant="secondary">Secondaire</GlassButton>
-            <GlassButton variant="accent">Accent</GlassButton>
-            <GlassButton variant="primary" disabled>Désactivé</GlassButton>
+          <h3 style={demoTitleStyles}>Boutons</h3>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <GlassButton variant="primary" size="sm">Primaire</GlassButton>
+            <GlassButton variant="secondary" size="sm">Secondaire</GlassButton>
+            <GlassButton variant="accent" size="sm">Accent</GlassButton>
+            <GlassButton variant="ghost" size="sm">Ghost</GlassButton>
           </div>
           <pre style={codeBlockStyles}>
 {`<GlassButton variant="primary">Primaire</GlassButton>
 <GlassButton variant="secondary">Secondaire</GlassButton>
-<GlassButton variant="accent">Accent</GlassButton>`}
+<GlassButton variant="accent">Accent</GlassButton>
+<GlassButton variant="ghost">Ghost</GlassButton>`}
           </pre>
         </GlassCard>
 
         {/* Inputs */}
         <GlassCard style={demoCardStyles}>
-          <h3 style={{ marginBottom: '1rem', color: currentColors.text }}>Champs de saisie</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <h3 style={demoTitleStyles}>Champs de saisie</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', textAlign: 'left' }}>
             <GlassInput
               placeholder="Entrez votre nom"
               value={inputValue}
@@ -185,20 +211,21 @@ const ComponentLibrary = () => {
 
         {/* Modal */}
         <GlassCard style={demoCardStyles}>
-          <h3 style={{ marginBottom: '1rem', color: currentColors.text }}>Modal</h3>
+          <h3 style={demoTitleStyles}>Modal</h3>
           <GlassButton variant="primary" onClick={() => setIsModalOpen(true)}>
             Ouvrir Modal
           </GlassButton>
           <GlassModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
-            title="Titre du Modal"
+            title="Exemple de Modal"
             size="md"
           >
-            <p style={{ color: currentColors.text, marginBottom: '1rem' }}>
-              Contenu du modal avec effet glassmorphism. Vous pouvez y placer n'importe quel contenu.
+            <p style={{ color: 'var(--color-text)', marginBottom: '20px', lineHeight: '1.6' }}>
+              Ceci est un exemple de contenu dans un modal avec effet glassmorphism. 
+              Le design est épuré et moderne.
             </p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
               <GlassButton variant="secondary" onClick={() => setIsModalOpen(false)}>
                 Annuler
               </GlassButton>
@@ -211,7 +238,7 @@ const ComponentLibrary = () => {
 {`<GlassModal
   isOpen={isModalOpen}
   onClose={() => setIsModalOpen(false)}
-  title="Titre du Modal"
+  title="Exemple de Modal"
   size="md"
 >
   <p>Contenu du modal...</p>
@@ -221,7 +248,7 @@ const ComponentLibrary = () => {
 
         {/* Dropdown */}
         <GlassCard style={demoCardStyles}>
-          <h3 style={{ marginBottom: '1rem', color: currentColors.text }}>Dropdown</h3>
+          <h3 style={demoTitleStyles}>Dropdown</h3>
           <GlassDropdown
             trigger={
               <GlassButton variant="secondary">
@@ -242,8 +269,8 @@ const ComponentLibrary = () => {
 
         {/* Toasts */}
         <GlassCard style={demoCardStyles}>
-          <h3 style={{ marginBottom: '1rem', color: currentColors.text }}>Notifications</h3>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <h3 style={demoTitleStyles}>Notifications</h3>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
             <GlassButton variant="primary" size="sm" onClick={() => handleToastDemo('success')}>
               Succès
             </GlassButton>
@@ -253,14 +280,17 @@ const ComponentLibrary = () => {
             <GlassButton variant="accent" size="sm" onClick={() => handleToastDemo('warning')}>
               Attention
             </GlassButton>
-            <GlassButton variant="secondary" size="sm" onClick={() => handleToastDemo('info')}>
+            <GlassButton variant="ghost" size="sm" onClick={() => handleToastDemo('info')}>
               Info
             </GlassButton>
           </div>
           <pre style={codeBlockStyles}>
 {`const { toast } = useToast();
-toast.success('Succès !', 'Opération réalisée');
-toast.error('Erreur !', 'Une erreur s\'est produite');`}
+
+toast.success('Opération réussie', 'Message de succès');
+toast.error('Erreur détectée', 'Message d\'erreur');
+toast.warning('Attention', 'Message d\'avertissement');
+toast.info('Information', 'Message d\'information');`}
           </pre>
         </GlassCard>
       </div>
@@ -273,19 +303,19 @@ toast.error('Erreur !', 'Une erreur s\'est produite');`}
       
       <div style={gridStyles}>
         <GlassCard style={demoCardStyles}>
-          <h3 style={{ marginBottom: '1rem', color: currentColors.text }}>Spinner</h3>
-          <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', alignItems: 'center' }}>
+          <h3 style={demoTitleStyles}>Spinner</h3>
+          <div style={{ display: 'flex', gap: '32px', justifyContent: 'center', alignItems: 'center' }}>
             <div style={{ textAlign: 'center' }}>
               <LoadingSpinner size="sm" color="primary" />
-              <p style={{ fontSize: '0.875rem', color: currentColors.textMuted, marginTop: '0.5rem' }}>Small</p>
+              <p style={{ fontSize: '0.8125rem', color: 'var(--color-text)', marginTop: '8px', opacity: 0.7 }}>Small</p>
             </div>
             <div style={{ textAlign: 'center' }}>
               <LoadingSpinner size="md" color="secondary" />
-              <p style={{ fontSize: '0.875rem', color: currentColors.textMuted, marginTop: '0.5rem' }}>Medium</p>
+              <p style={{ fontSize: '0.8125rem', color: 'var(--color-text)', marginTop: '8px', opacity: 0.7 }}>Medium</p>
             </div>
             <div style={{ textAlign: 'center' }}>
               <LoadingSpinner size="lg" color="accent" />
-              <p style={{ fontSize: '0.875rem', color: currentColors.textMuted, marginTop: '0.5rem' }}>Large</p>
+              <p style={{ fontSize: '0.8125rem', color: 'var(--color-text)', marginTop: '8px', opacity: 0.7 }}>Large</p>
             </div>
           </div>
           <pre style={codeBlockStyles}>
@@ -296,19 +326,19 @@ toast.error('Erreur !', 'Une erreur s\'est produite');`}
         </GlassCard>
 
         <GlassCard style={demoCardStyles}>
-          <h3 style={{ marginBottom: '1rem', color: currentColors.text }}>Pulse Loader</h3>
-          <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', alignItems: 'center' }}>
+          <h3 style={demoTitleStyles}>Pulse Loader</h3>
+          <div style={{ display: 'flex', gap: '32px', justifyContent: 'center', alignItems: 'center' }}>
             <div style={{ textAlign: 'center' }}>
               <PulseLoader size="sm" color="primary" />
-              <p style={{ fontSize: '0.875rem', color: currentColors.textMuted, marginTop: '0.5rem' }}>Small</p>
+              <p style={{ fontSize: '0.8125rem', color: 'var(--color-text)', marginTop: '8px', opacity: 0.7 }}>Small</p>
             </div>
             <div style={{ textAlign: 'center' }}>
               <PulseLoader size="md" color="secondary" />
-              <p style={{ fontSize: '0.875rem', color: currentColors.textMuted, marginTop: '0.5rem' }}>Medium</p>
+              <p style={{ fontSize: '0.8125rem', color: 'var(--color-text)', marginTop: '8px', opacity: 0.7 }}>Medium</p>
             </div>
             <div style={{ textAlign: 'center' }}>
               <PulseLoader size="lg" color="accent" />
-              <p style={{ fontSize: '0.875rem', color: currentColors.textMuted, marginTop: '0.5rem' }}>Large</p>
+              <p style={{ fontSize: '0.8125rem', color: 'var(--color-text)', marginTop: '8px', opacity: 0.7 }}>Large</p>
             </div>
           </div>
           <pre style={codeBlockStyles}>
@@ -319,19 +349,19 @@ toast.error('Erreur !', 'Une erreur s\'est produite');`}
         </GlassCard>
 
         <GlassCard style={demoCardStyles}>
-          <h3 style={{ marginBottom: '1rem', color: currentColors.text }}>Wave Loader</h3>
-          <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', alignItems: 'center' }}>
+          <h3 style={demoTitleStyles}>Wave Loader</h3>
+          <div style={{ display: 'flex', gap: '32px', justifyContent: 'center', alignItems: 'center' }}>
             <div style={{ textAlign: 'center' }}>
               <WaveLoader size="sm" color="primary" />
-              <p style={{ fontSize: '0.875rem', color: currentColors.textMuted, marginTop: '0.5rem' }}>Small</p>
+              <p style={{ fontSize: '0.8125rem', color: 'var(--color-text)', marginTop: '8px', opacity: 0.7 }}>Small</p>
             </div>
             <div style={{ textAlign: 'center' }}>
               <WaveLoader size="md" color="secondary" />
-              <p style={{ fontSize: '0.875rem', color: currentColors.textMuted, marginTop: '0.5rem' }}>Medium</p>
+              <p style={{ fontSize: '0.8125rem', color: 'var(--color-text)', marginTop: '8px', opacity: 0.7 }}>Medium</p>
             </div>
             <div style={{ textAlign: 'center' }}>
               <WaveLoader size="lg" color="accent" />
-              <p style={{ fontSize: '0.875rem', color: currentColors.textMuted, marginTop: '0.5rem' }}>Large</p>
+              <p style={{ fontSize: '0.8125rem', color: 'var(--color-text)', marginTop: '8px', opacity: 0.7 }}>Large</p>
             </div>
           </div>
           <pre style={codeBlockStyles}>
@@ -349,14 +379,14 @@ toast.error('Erreur !', 'Une erreur s\'est produite');`}
       <h2 style={sectionTitleStyles}>💼 Composants SaaS</h2>
       
       {/* Dashboard */}
-      <div style={{ marginBottom: '3rem' }}>
-        <h3 style={{ fontSize: '1.5rem', color: currentColors.text, marginBottom: '1rem' }}>Dashboard</h3>
+      <div style={{ marginBottom: '48px' }}>
+        <h3 style={{ fontSize: '1.5rem', color: 'var(--color-text)', marginBottom: '24px', textAlign: 'center' }}>Dashboard</h3>
         <Dashboard data={dashboardData} />
       </div>
 
       {/* Metrics Cards */}
-      <div style={{ marginBottom: '3rem' }}>
-        <h3 style={{ fontSize: '1.5rem', color: currentColors.text, marginBottom: '1rem' }}>Cartes de Métriques</h3>
+      <div style={{ marginBottom: '48px' }}>
+        <h3 style={{ fontSize: '1.5rem', color: 'var(--color-text)', marginBottom: '24px', textAlign: 'center' }}>Cartes de Métriques</h3>
         <div style={gridStyles}>
           {metricsData.map((metric, index) => (
             <MetricCard
@@ -381,8 +411,8 @@ toast.error('Erreur !', 'Une erreur s\'est produite');`}
       </div>
 
       {/* Speedometers */}
-      <div style={{ marginBottom: '3rem' }}>
-        <h3 style={{ fontSize: '1.5rem', color: currentColors.text, marginBottom: '1rem' }}>Speedometers</h3>
+      <div style={{ marginBottom: '48px' }}>
+        <h3 style={{ fontSize: '1.5rem', color: 'var(--color-text)', marginBottom: '24px', textAlign: 'center' }}>Speedometers</h3>
         <div style={gridStyles}>
           {speedometerData.map((speedometer, index) => (
             <Speedometer
@@ -409,9 +439,9 @@ toast.error('Erreur !', 'Une erreur s\'est produite');`}
       </div>
 
       {/* Collapsible Panels */}
-      <div style={{ marginBottom: '3rem' }}>
-        <h3 style={{ fontSize: '1.5rem', color: currentColors.text, marginBottom: '1rem' }}>Panneaux Dépliants</h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div style={{ marginBottom: '48px' }}>
+        <h3 style={{ fontSize: '1.5rem', color: 'var(--color-text)', marginBottom: '24px', textAlign: 'center' }}>Panneaux Dépliants</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '800px', margin: '0 auto' }}>
           {panelData.map((panel, index) => (
             <CollapsiblePanel
               key={index}
@@ -419,7 +449,7 @@ toast.error('Erreur !', 'Une erreur s\'est produite');`}
               icon={panel.icon}
               defaultExpanded={index === 0}
             >
-              <p style={{ color: currentColors.text, lineHeight: '1.6' }}>
+              <p style={{ color: 'var(--color-text)', lineHeight: '1.6', opacity: 0.8 }}>
                 {panel.content}
               </p>
             </CollapsiblePanel>
@@ -437,8 +467,8 @@ toast.error('Erreur !', 'Une erreur s\'est produite');`}
       </div>
 
       {/* Data Table */}
-      <div style={{ marginBottom: '3rem' }}>
-        <h3 style={{ fontSize: '1.5rem', color: currentColors.text, marginBottom: '1rem' }}>Tableau de Données</h3>
+      <div style={{ marginBottom: '48px' }}>
+        <h3 style={{ fontSize: '1.5rem', color: 'var(--color-text)', marginBottom: '24px', textAlign: 'center' }}>Tableau de Données</h3>
         <DataTable
           data={tableData}
           columns={tableColumns}
@@ -465,13 +495,13 @@ toast.error('Erreur !', 'Une erreur s\'est produite');`}
     <div style={sectionStyles}>
       <h2 style={sectionTitleStyles}>🎨 Système de Thèmes</h2>
       
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
         <ThemeSwitcher />
       </div>
 
-      <GlassCard style={{ padding: '2rem' }}>
-        <h3 style={{ marginBottom: '1rem', color: currentColors.text }}>Variables CSS Personnalisables</h3>
-        <p style={{ color: currentColors.textMuted, marginBottom: '1rem' }}>
+      <GlassCard style={{ padding: '32px', maxWidth: '800px', margin: '0 auto' }}>
+        <h3 style={{ marginBottom: '20px', color: 'var(--color-text)', fontSize: '1.25rem' }}>Variables CSS Personnalisables</h3>
+        <p style={{ color: 'var(--color-text)', marginBottom: '20px', lineHeight: '1.6', opacity: 0.8 }}>
           Tous les composants utilisent des variables CSS dynamiques qui s'adaptent automatiquement au thème sélectionné.
         </p>
         <pre style={codeBlockStyles}>
@@ -499,7 +529,7 @@ toast.error('Erreur !', 'Une erreur s\'est produite');`}
       <div style={headerStyles}>
         <h1 style={titleStyles}>Librairie de Composants SaaS</h1>
         <p style={subtitleStyles}>
-          Collection complète de composants React avec effet glassmorphism et système de thèmes
+          Collection moderne de composants React avec design glassmorphism et système de thèmes avancé
         </p>
         
         <div style={navigationStyles}>
@@ -508,6 +538,7 @@ toast.error('Erreur !', 'Une erreur s\'est produite');`}
               key={section.id}
               variant={selectedSection === section.id ? 'primary' : 'secondary'}
               onClick={() => setSelectedSection(section.id)}
+              size="sm"
             >
               {section.icon} {section.label}
             </GlassButton>
@@ -515,10 +546,12 @@ toast.error('Erreur !', 'Une erreur s\'est produite');`}
         </div>
       </div>
 
-      {selectedSection === 'basics' && renderBasicComponents()}
-      {selectedSection === 'loaders' && renderLoaders()}
-      {selectedSection === 'saas' && renderSaaSComponents()}
-      {selectedSection === 'themes' && renderThemes()}
+      <div style={contentStyles}>
+        {selectedSection === 'basics' && renderBasicComponents()}
+        {selectedSection === 'loaders' && renderLoaders()}
+        {selectedSection === 'saas' && renderSaaSComponents()}
+        {selectedSection === 'themes' && renderThemes()}
+      </div>
     </div>
   );
 };

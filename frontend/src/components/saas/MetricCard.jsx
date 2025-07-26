@@ -13,76 +13,77 @@ export const MetricCard = ({
   const { theme } = useTheme();
 
   const cardStyles = {
-    padding: '1.5rem',
+    padding: '24px',
     position: 'relative',
-    overflow: 'hidden'
+    minHeight: '140px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   };
 
   const headerStyles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: '1rem'
+    marginBottom: '20px'
   };
 
   const iconStyles = {
-    width: '48px',
-    height: '48px',
+    width: '44px',
+    height: '44px',
     borderRadius: '12px',
-    backgroundColor: 'var(--color-primary)',
-    color: 'white',
+    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+    color: 'var(--color-primary)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '1.5rem',
-    boxShadow: '0 4px 12px rgba(99, 102, 241, 0.3)'
+    fontSize: '1.25rem',
+    border: '1px solid rgba(99, 102, 241, 0.2)'
   };
 
   const titleStyles = {
     fontSize: '0.875rem',
-    color: 'var(--color-textMuted)',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    marginBottom: '0.5rem'
+    color: 'var(--color-text)',
+    opacity: 0.8,
+    fontWeight: '500',
+    marginBottom: '8px'
   };
 
   const valueStyles = {
-    fontSize: '2rem',
+    fontSize: '1.875rem',
     fontWeight: '700',
     color: 'var(--color-text)',
-    marginBottom: '0.5rem'
+    lineHeight: '1.2',
+    marginBottom: '12px'
   };
 
   const changeStyles = {
     display: 'flex',
     alignItems: 'center',
-    gap: '0.25rem',
-    fontSize: '0.875rem',
+    gap: '4px',
+    fontSize: '0.8125rem',
+    fontWeight: '500',
     color: trend === 'up' ? '#10b981' : '#ef4444'
   };
 
-  const backgroundPattern = {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    width: '100px',
-    height: '100px',
-    opacity: 0.1,
-    background: `linear-gradient(45deg, var(--color-primary), var(--color-secondary))`,
-    borderRadius: '50%',
-    transform: 'translate(30px, -30px)'
+  const trendIconStyles = {
+    fontSize: '0.75rem',
+    fontWeight: 'bold'
   };
 
   return (
     <GlassCard style={cardStyles} className={className}>
-      <div style={backgroundPattern} />
-      <div style={headerStyles}>
-        <div style={titleStyles}>{title}</div>
-        <div style={iconStyles}>{icon}</div>
+      <div>
+        <div style={headerStyles}>
+          <div style={titleStyles}>{title}</div>
+          <div style={iconStyles}>{icon}</div>
+        </div>
+        <div style={valueStyles}>{value}</div>
       </div>
-      <div style={valueStyles}>{value}</div>
       <div style={changeStyles}>
-        <span>{trend === 'up' ? '↗' : '↘'}</span>
+        <span style={trendIconStyles}>
+          {trend === 'up' ? '↗' : '↘'}
+        </span>
         <span>{change}</span>
       </div>
     </GlassCard>

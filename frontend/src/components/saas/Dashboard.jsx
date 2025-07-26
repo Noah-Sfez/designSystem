@@ -7,103 +7,144 @@ export const Dashboard = ({ data }) => {
   const { theme } = useTheme();
   const [selectedMetric, setSelectedMetric] = useState('users');
 
-  const dashboardStyles = {
-    padding: '2rem',
+  const containerStyles = {
     display: 'grid',
-    gap: '2rem',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))'
+    gap: '24px',
+    gridTemplateColumns: '1fr'
   };
 
   const headerStyles = {
-    marginBottom: '2rem'
+    marginBottom: '32px'
   };
 
   const titleStyles = {
     fontSize: '2rem',
     fontWeight: '700',
     color: 'var(--color-text)',
-    marginBottom: '0.5rem'
+    marginBottom: '8px'
   };
 
   const subtitleStyles = {
-    color: 'var(--color-textMuted)',
-    fontSize: '1.125rem'
+    color: 'var(--color-text)',
+    fontSize: '1rem',
+    opacity: 0.7
   };
 
   const metricsGrid = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '1rem',
-    marginBottom: '2rem'
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: '16px',
+    marginBottom: '32px'
   };
 
   const metricCardStyles = {
-    padding: '1.5rem',
+    padding: '20px',
     textAlign: 'center',
     cursor: 'pointer',
-    transition: 'all 0.3s',
-    border: selectedMetric === 'users' ? '2px solid var(--color-primary)' : '1px solid var(--color-border)'
+    transition: 'all 0.2s',
+    border: selectedMetric === 'users' ? '2px solid var(--color-primary)' : '1px solid rgba(255, 255, 255, 0.08)',
+    position: 'relative'
   };
 
   const metricValueStyles = {
-    fontSize: '2.5rem',
+    fontSize: '2rem',
     fontWeight: '700',
-    color: 'var(--color-primary)',
-    marginBottom: '0.5rem'
+    color: 'var(--color-text)',
+    marginBottom: '8px'
   };
 
   const metricLabelStyles = {
-    color: 'var(--color-textMuted)',
+    color: 'var(--color-text)',
     fontSize: '0.875rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    opacity: 0.7,
+    fontWeight: '500'
+  };
+
+  const chartContainerStyles = {
+    padding: '24px'
+  };
+
+  const chartTitleStyles = {
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    color: 'var(--color-text)',
+    marginBottom: '20px'
   };
 
   const chartPlaceholderStyles = {
     height: '300px',
-    backgroundColor: 'var(--color-surface)',
-    borderRadius: 'var(--border-radius)',
-    border: '1px solid var(--color-border)',
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: '12px',
+    border: '1px solid rgba(255, 255, 255, 0.05)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: 'var(--color-textMuted)',
-    fontSize: '1.125rem',
-    backgroundImage: `linear-gradient(45deg, transparent 25%, var(--color-border) 25%, var(--color-border) 50%, transparent 50%, transparent 75%, var(--color-border) 75%)`,
-    backgroundSize: '20px 20px'
+    color: 'var(--color-text)',
+    fontSize: '1rem',
+    opacity: 0.6
+  };
+
+  const actionsStyles = {
+    padding: '24px'
+  };
+
+  const buttonGroupStyles = {
+    display: 'flex',
+    gap: '12px',
+    flexWrap: 'wrap'
+  };
+
+  const handleMetricClick = (metric) => {
+    setSelectedMetric(metric);
   };
 
   return (
-    <div style={dashboardStyles}>
+    <div style={containerStyles}>
       <div style={headerStyles}>
         <h1 style={titleStyles}>Dashboard Analytics</h1>
         <p style={subtitleStyles}>Vue d'ensemble de vos métriques business</p>
       </div>
 
       <div style={metricsGrid}>
-        <GlassCard style={metricCardStyles} onClick={() => setSelectedMetric('users')}>
+        <GlassCard 
+          style={metricCardStyles} 
+          onClick={() => handleMetricClick('users')}
+          hover={false}
+        >
           <div style={metricValueStyles}>{data.users.toLocaleString()}</div>
           <div style={metricLabelStyles}>Utilisateurs Actifs</div>
         </GlassCard>
 
-        <GlassCard style={metricCardStyles} onClick={() => setSelectedMetric('revenue')}>
+        <GlassCard 
+          style={metricCardStyles} 
+          onClick={() => handleMetricClick('revenue')}
+          hover={false}
+        >
           <div style={metricValueStyles}>{data.revenue.toLocaleString()}€</div>
           <div style={metricLabelStyles}>Chiffre d'Affaires</div>
         </GlassCard>
 
-        <GlassCard style={metricCardStyles} onClick={() => setSelectedMetric('conversion')}>
+        <GlassCard 
+          style={metricCardStyles} 
+          onClick={() => handleMetricClick('conversion')}
+          hover={false}
+        >
           <div style={metricValueStyles}>{data.conversion}%</div>
           <div style={metricLabelStyles}>Taux de Conversion</div>
         </GlassCard>
 
-        <GlassCard style={metricCardStyles} onClick={() => setSelectedMetric('growth')}>
+        <GlassCard 
+          style={metricCardStyles} 
+          onClick={() => handleMetricClick('growth')}
+          hover={false}
+        >
           <div style={metricValueStyles}>+{data.growth}%</div>
           <div style={metricLabelStyles}>Croissance</div>
         </GlassCard>
       </div>
 
-      <GlassCard>
-        <h3 style={{ marginBottom: '1rem', color: 'var(--color-text)' }}>
+      <GlassCard style={chartContainerStyles}>
+        <h3 style={chartTitleStyles}>
           Évolution - {selectedMetric.charAt(0).toUpperCase() + selectedMetric.slice(1)}
         </h3>
         <div style={chartPlaceholderStyles}>
@@ -111,12 +152,12 @@ export const Dashboard = ({ data }) => {
         </div>
       </GlassCard>
 
-      <GlassCard>
-        <h3 style={{ marginBottom: '1rem', color: 'var(--color-text)' }}>Actions Rapides</h3>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <GlassButton variant="primary">Générer Rapport</GlassButton>
-          <GlassButton variant="secondary">Exporter Données</GlassButton>
-          <GlassButton variant="accent">Paramètres</GlassButton>
+      <GlassCard style={actionsStyles}>
+        <h3 style={chartTitleStyles}>Actions Rapides</h3>
+        <div style={buttonGroupStyles}>
+          <GlassButton variant="primary" size="sm">Générer Rapport</GlassButton>
+          <GlassButton variant="secondary" size="sm">Exporter Données</GlassButton>
+          <GlassButton variant="accent" size="sm">Paramètres</GlassButton>
         </div>
       </GlassCard>
     </div>
