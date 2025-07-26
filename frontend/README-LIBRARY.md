@@ -19,8 +19,6 @@ Librairie moderne de composants React avec design glassmorphism et système de t
 
 ```bash
 npm install @votre-nom/react-glass-components
-# ou
-yarn add @votre-nom/react-glass-components
 ```
 
 ## 📖 Utilisation de base
