@@ -8,7 +8,7 @@ Merci de votre intérêt pour contribuer à React Glass Components ! 🎉
 ```bash
 git clone https://github.com/votre-nom/react-glass-components.git
 cd react-glass-components
-yarn install
+npm install
 ```
 
 ### 2. Créer une branche
@@ -21,25 +21,25 @@ git checkout -b fix/correction-bug
 ### 3. Développer
 ```bash
 # Lancer le serveur de développement
-yarn start
+npm start
 
 # Lancer les tests
-yarn test
+npm test
 
 # Lancer la documentation
-yarn storybook
+npm run storybook
 ```
 
 ### 4. Tester
 ```bash
 # Tests unitaires
-yarn test
+npm test
 
 # Tests de build
-yarn build
+npm run build
 
 # Vérifier le linting
-yarn lint
+npm run lint
 ```
 
 ### 5. Commit et Push
