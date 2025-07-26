@@ -142,10 +142,10 @@ node scripts/build-library.js
 node scripts/deploy-docs.js
 
 # Développement local
-yarn start
+npm start
 
 # Tests
-yarn test
+npm test
 ```
 
 ## 📦 Structure du package publié
