@@ -447,6 +447,7 @@ toast.info('Information', 'Message d\'information');`}
               key={index}
               title={panel.title}
               icon={panel.icon}
+              variant={panel.variant}
               defaultExpanded={index === 0}
             >
               <p style={{ color: 'var(--color-text)', lineHeight: '1.6', opacity: 0.8 }}>
@@ -459,6 +460,7 @@ toast.info('Information', 'Message d\'information');`}
 {`<CollapsiblePanel
   title="Statistiques Utilisateurs"
   icon="📊"
+  variant="default"
   defaultExpanded={true}
 >
   <p>Contenu du panneau...</p>
