@@ -543,21 +543,120 @@ const ComponentLibrary = () => {
       <div style={{ marginBottom: '48px' }}>
         <h3 style={{ fontSize: '1.5rem', color: 'var(--color-text)', marginBottom: '24px', textAlign: 'center' }}>Tableau de Données</h3>
         <DataTable
+          title="Gestion des Utilisateurs"
           data={tableData}
           columns={tableColumns}
           searchable={true}
           sortable={true}
           pagination={true}
           pageSize={5}
+          actions={[
+            { label: 'Exporter', onClick: (selectedRows) => console.log('Export:', selectedRows) },
+            { label: 'Supprimer', onClick: (selectedRows) => console.log('Delete:', selectedRows) }
+          ]}
+          filters={[
+            {
+              key: 'status',
+              label: 'Statut',
+              options: [
+                { value: 'Actif', label: 'Actif' },
+                { value: 'Inactif', label: 'Inactif' },
+                { value: 'Suspendu', label: 'Suspendu' }
+              ]
+            },
+            {
+              key: 'subscription',
+              label: 'Abonnement',
+              options: [
+                { value: 'Basic', label: 'Basic' },
+                { value: 'Premium', label: 'Premium' },
+                { value: 'Enterprise', label: 'Enterprise' }
+              ]
+            }
+          ]}
         />
         <pre style={codeBlockStyles}>
 {`<DataTable
+  title="Gestion des Utilisateurs"
   data={tableData}
   columns={tableColumns}
   searchable={true}
   sortable={true}
   pagination={true}
   pageSize={5}
+  actions={[
+    { label: 'Exporter', onClick: (selectedRows) => exportData(selectedRows) },
+    { label: 'Supprimer', onClick: (selectedRows) => deleteItems(selectedRows) }
+  ]}
+  filters={[
+    {
+      key: 'status',
+      label: 'Statut',
+      options: [
+        { value: 'Actif', label: 'Actif' },
+        { value: 'Inactif', label: 'Inactif' }
+      ]
+    }
+  ]}
+/>`}
+        </pre>
+      </div>
+
+      {/* Timeline */}
+      <div style={{ marginBottom: '48px' }}>
+        <h3 style={{ fontSize: '1.5rem', color: 'var(--color-text)', marginBottom: '24px', textAlign: 'center' }}>Timeline</h3>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <Timeline 
+            items={timelineData}
+            showTime={true}
+            showConnector={true}
+            variant="vertical"
+          />
+        </div>
+        <pre style={codeBlockStyles}>
+{`<Timeline 
+  items={timelineData}
+  showTime={true}
+  showConnector={true}
+  variant="vertical"
+/>`}
+        </pre>
+      </div>
+
+      {/* User Profile Cards */}
+      <div style={{ marginBottom: '48px' }}>
+        <h3 style={{ fontSize: '1.5rem', color: 'var(--color-text)', marginBottom: '24px', textAlign: 'center' }}>Profils Utilisateurs</h3>
+        <div style={gridStyles}>
+          <UserProfileCard
+            user={userProfileData}
+            showStats={true}
+            showBadges={true}
+            variant="default"
+            actions={[
+              { label: 'Contacter', onClick: () => {} },
+              { label: 'Suivre', onClick: () => {} }
+            ]}
+          />
+          <UserProfileCard
+            user={{ ...userProfileData, name: 'Jean Martin', role: 'Premium User' }}
+            showStats={true}
+            showBadges={true}
+            variant="premium"
+            actions={[
+              { label: 'Gérer', onClick: () => {} }
+            ]}
+          />
+        </div>
+        <pre style={codeBlockStyles}>
+{`<UserProfileCard
+  user={userProfileData}
+  showStats={true}
+  showBadges={true}
+  variant="premium"
+  actions={[
+    { label: 'Contacter', onClick: () => {} },
+    { label: 'Suivre', onClick: () => {} }
+  ]}
 />`}
         </pre>
       </div>
