@@ -88,9 +88,9 @@ export const GlassButton = ({
 
   const handleMouseEnter = (e) => {
     if (disabled) return;
-    const variant = variantStyles[variant];
-    if (variant[':hover']) {
-      Object.assign(e.target.style, variant[':hover']);
+    const variantStyle = variantStyles[variant];
+    if (variantStyle[':hover']) {
+      Object.assign(e.target.style, variantStyle[':hover']);
     }
   };
 
