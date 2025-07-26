@@ -168,12 +168,7 @@ export const StatsCard = ({
     fontWeight: '700',
     color: 'var(--color-text)',
     lineHeight: '1.1',
-    marginBottom: '16px',
-    background: currentColor.gradient,
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-    textShadow: `0 0 30px ${currentColor.glow}30`
+    marginBottom: '16px'
   };
 
   const trendStyles = {
