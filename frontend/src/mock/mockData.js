@@ -77,6 +77,42 @@ export const tableData = [
     subscription: 'Premium',
     lastLogin: '2024-01-05',
     revenue: 29.99
+  },
+  {
+    id: 9,
+    name: 'Isabelle Noir',
+    email: 'isabelle@example.com',
+    status: 'Actif',
+    subscription: 'Enterprise',
+    lastLogin: '2024-01-16',
+    revenue: 99.99
+  },
+  {
+    id: 10,
+    name: 'Jean Vert',
+    email: 'jean@example.com',
+    status: 'Suspendu',
+    subscription: 'Basic',
+    lastLogin: '2024-01-07',
+    revenue: 9.99
+  },
+  {
+    id: 11,
+    name: 'Karine Rose',
+    email: 'karine@example.com',
+    status: 'Actif',
+    subscription: 'Premium',
+    lastLogin: '2024-01-15',
+    revenue: 29.99
+  },
+  {
+    id: 12,
+    name: 'Laurent Bleu',
+    email: 'laurent@example.com',
+    status: 'Actif',
+    subscription: 'Enterprise',
+    lastLogin: '2024-01-16',
+    revenue: 99.99
   }
 ];
 
@@ -153,22 +189,26 @@ export const panelData = [
   {
     title: 'Statistiques Utilisateurs',
     icon: '📊',
-    content: 'Analyse détaillée des comportements utilisateurs, sessions actives et tendances d\'utilisation.'
+    variant: 'default',
+    content: 'Analyse détaillée des comportements utilisateurs avec métriques en temps réel. Suivi des sessions actives, pages vues, temps passé sur le site et taux de rebond. Segmentation par démographie et comportement d\'achat.'
   },
   {
     title: 'Gestion des Abonnements',
     icon: '💳',
-    content: 'Suivi des abonnements, renouvellements automatiques et gestion des paiements.'
+    variant: 'success',
+    content: 'Suivi complet des abonnements avec renouvellements automatiques, gestion des paiements et facturation. Alertes pour les échéances, rapports de revenus récurrents et analyses de churn rate.'
   },
   {
     title: 'Support Client',
     icon: '🎧',
-    content: 'Centre d\'aide, tickets de support et FAQ pour améliorer l\'expérience utilisateur.'
+    variant: 'warning',
+    content: 'Centre d\'aide intégré avec système de tickets, chat en direct et FAQ dynamique. Analyses de satisfaction client, temps de réponse et résolution des problèmes. Base de connaissances collaborative.'
   },
   {
     title: 'Paramètres Système',
     icon: '⚙️',
-    content: 'Configuration avancée, paramètres de sécurité et options d\'administration.'
+    variant: 'danger',
+    content: 'Configuration avancée de l\'application avec paramètres de sécurité, options d\'administration et gestion des permissions. Logs système, monitoring des performances et gestion des sauvegardes.'
   }
 ];
 
@@ -180,22 +220,58 @@ export const tableColumns = [
     label: 'Statut',
     render: (value) => (
       <span style={{
-        padding: '0.25rem 0.5rem',
-        borderRadius: '4px',
+        padding: '4px 8px',
+        borderRadius: '12px',
         fontSize: '0.75rem',
         fontWeight: '500',
-        backgroundColor: value === 'Actif' ? '#10b98140' : value === 'Inactif' ? '#f59e0b40' : '#ef444440',
-        color: value === 'Actif' ? '#10b981' : value === 'Inactif' ? '#f59e0b' : '#ef4444'
+        backgroundColor: value === 'Actif' ? 'rgba(16, 185, 129, 0.1)' : 
+                         value === 'Inactif' ? 'rgba(245, 158, 11, 0.1)' : 
+                         'rgba(239, 68, 68, 0.1)',
+        color: value === 'Actif' ? '#10b981' : 
+               value === 'Inactif' ? '#f59e0b' : 
+               '#ef4444',
+        border: `1px solid ${value === 'Actif' ? 'rgba(16, 185, 129, 0.2)' : 
+                              value === 'Inactif' ? 'rgba(245, 158, 11, 0.2)' : 
+                              'rgba(239, 68, 68, 0.2)'}`
       }}>
         {value}
       </span>
     )
   },
-  { key: 'subscription', label: 'Abonnement' },
+  { 
+    key: 'subscription', 
+    label: 'Abonnement',
+    render: (value) => (
+      <span style={{
+        padding: '4px 8px',
+        borderRadius: '12px',
+        fontSize: '0.75rem',
+        fontWeight: '500',
+        backgroundColor: value === 'Enterprise' ? 'rgba(99, 102, 241, 0.1)' : 
+                         value === 'Premium' ? 'rgba(139, 92, 246, 0.1)' : 
+                         'rgba(6, 182, 212, 0.1)',
+        color: value === 'Enterprise' ? '#6366f1' : 
+               value === 'Premium' ? '#8b5cf6' : 
+               '#06b6d4',
+        border: `1px solid ${value === 'Enterprise' ? 'rgba(99, 102, 241, 0.2)' : 
+                              value === 'Premium' ? 'rgba(139, 92, 246, 0.2)' : 
+                              'rgba(6, 182, 212, 0.2)'}`
+      }}>
+        {value}
+      </span>
+    )
+  },
   { key: 'lastLogin', label: 'Dernière Connexion' },
   { 
     key: 'revenue', 
     label: 'Revenue',
-    render: (value) => `${value}€`
+    render: (value) => (
+      <span style={{ 
+        fontWeight: '600',
+        color: 'var(--color-text)'
+      }}>
+        {value}€
+      </span>
+    )
   }
 ];
