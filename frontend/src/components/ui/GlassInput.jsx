@@ -15,41 +15,53 @@ export const GlassInput = ({
   const [isFocused, setIsFocused] = useState(false);
   const { theme } = useTheme();
 
-  const baseStyles = {
+  const containerStyles = {
     position: 'relative',
-    width: '100%',
-    padding: '0.75rem 1rem',
-    fontSize: '1rem',
-    borderRadius: 'var(--border-radius)',
-    border: `1px solid ${error ? '#ef4444' : 'var(--color-border)'}`,
-    backgroundColor: 'var(--color-surface)',
-    backdropFilter: `blur(var(--backdrop-blur))`,
-    WebkitBackdropFilter: `blur(var(--backdrop-blur))`,
-    color: 'var(--color-text)',
-    outline: 'none',
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-    boxShadow: isFocused 
-      ? `0 0 0 2px ${error ? '#ef4444' : 'var(--color-primary)'}40`
-      : '0 2px 4px var(--color-shadow)',
-    opacity: disabled ? 0.6 : 1
+    width: '100%'
   };
 
   const labelStyles = {
     display: 'block',
-    marginBottom: '0.5rem',
+    marginBottom: '8px',
     fontSize: '0.875rem',
     fontWeight: '500',
-    color: 'var(--color-text)'
+    color: 'var(--color-text)',
+    opacity: 0.9
+  };
+
+  const inputStyles = {
+    width: '100%',
+    padding: '14px 16px',
+    fontSize: '0.9375rem',
+    borderRadius: '12px',
+    border: error ? '2px solid #ef4444' : isFocused ? '2px solid var(--color-primary)' : '1px solid rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backdropFilter: 'blur(10px)',
+    color: 'var(--color-text)',
+    outline: 'none',
+    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+    fontFamily: 'inherit',
+    opacity: disabled ? 0.5 : 1,
+    cursor: disabled ? 'not-allowed' : 'text'
   };
 
   const errorStyles = {
-    marginTop: '0.25rem',
-    fontSize: '0.875rem',
-    color: '#ef4444'
+    marginTop: '6px',
+    fontSize: '0.8125rem',
+    color: '#ef4444',
+    opacity: 0.9
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
   };
 
   return (
-    <div className={`glass-input-container ${className}`}>
+    <div style={containerStyles} className={`glass-input-container ${className}`}>
       {label && (
         <label style={labelStyles}>
           {label}
@@ -61,9 +73,9 @@ export const GlassInput = ({
         onChange={onChange}
         placeholder={placeholder}
         disabled={disabled}
-        style={baseStyles}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        style={inputStyles}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         {...props}
       />
       {error && (

@@ -14,7 +14,7 @@ export const useToast = () => {
 export const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
 
-  const addToast = useCallback(({ title, description, type = 'info', duration = 5000 }) => {
+  const addToast = useCallback(({ title, description, type = 'info', duration = 4000 }) => {
     const id = Date.now() + Math.random();
     const toast = { id, title, description, type, duration };
     
@@ -47,16 +47,14 @@ export const ToastProvider = ({ children }) => {
 };
 
 const ToastContainer = ({ toasts, removeToast }) => {
-  const { theme } = useTheme();
-
   const containerStyles = {
     position: 'fixed',
-    top: '1rem',
-    right: '1rem',
+    top: '20px',
+    right: '20px',
     zIndex: 1000,
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.5rem',
+    gap: '12px',
     maxWidth: '400px'
   };
 
@@ -70,18 +68,23 @@ const ToastContainer = ({ toasts, removeToast }) => {
 };
 
 const Toast = ({ toast, onClose }) => {
-  const { theme } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
+  const [isLeaving, setIsLeaving] = useState(false);
 
   React.useEffect(() => {
     setTimeout(() => setIsVisible(true), 100);
   }, []);
 
+  const handleClose = () => {
+    setIsLeaving(true);
+    setTimeout(() => onClose(), 300);
+  };
+
   const typeColors = {
     success: '#10b981',
     error: '#ef4444',
     warning: '#f59e0b',
-    info: 'var(--color-primary)'
+    info: '#3b82f6'
   };
 
   const typeIcons = {
@@ -92,71 +95,85 @@ const Toast = ({ toast, onClose }) => {
   };
 
   const toastStyles = {
-    backgroundColor: 'var(--color-surface)',
-    backdropFilter: `blur(var(--backdrop-blur))`,
-    WebkitBackdropFilter: `blur(var(--backdrop-blur))`,
-    borderRadius: 'var(--border-radius)',
-    border: '1px solid var(--color-border)',
-    borderLeft: `4px solid ${typeColors[toast.type]}`,
-    padding: '1rem',
-    boxShadow: '0 10px 25px var(--color-shadow)',
-    transform: isVisible ? 'translateX(0)' : 'translateX(100%)',
-    opacity: isVisible ? 1 : 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
+    borderRadius: '12px',
+    border: '1px solid rgba(255, 255, 255, 0.12)',
+    padding: '16px',
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+    transform: isLeaving ? 'translateX(100%)' : (isVisible ? 'translateX(0)' : 'translateX(100%)'),
+    opacity: isLeaving ? 0 : (isVisible ? 1 : 0),
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-    position: 'relative'
+    position: 'relative',
+    minWidth: '320px'
   };
 
   const headerStyles = {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
-    marginBottom: toast.description ? '0.5rem' : 0
+    marginBottom: toast.description ? '8px' : 0
   };
 
   const titleStyles = {
     display: 'flex',
     alignItems: 'center',
-    gap: '0.5rem',
-    fontWeight: '600',
+    gap: '8px',
+    fontWeight: '500',
     color: 'var(--color-text)',
-    fontSize: '0.875rem'
+    fontSize: '0.875rem',
+    lineHeight: '1.4'
   };
 
   const iconStyles = {
-    width: '16px',
-    height: '16px',
+    width: '18px',
+    height: '18px',
     borderRadius: '50%',
     backgroundColor: typeColors[toast.type],
     color: 'white',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '0.75rem'
+    fontSize: '0.75rem',
+    fontWeight: 'bold',
+    flexShrink: 0
   };
 
   const descriptionStyles = {
-    color: 'var(--color-textMuted)',
-    fontSize: '0.875rem',
-    lineHeight: '1.4'
+    color: 'var(--color-text)',
+    fontSize: '0.8125rem',
+    lineHeight: '1.5',
+    opacity: 0.8,
+    marginLeft: '26px'
   };
 
   const closeButtonStyles = {
     background: 'none',
     border: 'none',
-    color: 'var(--color-textMuted)',
+    color: 'var(--color-text)',
     cursor: 'pointer',
-    padding: '0.25rem',
-    fontSize: '1.2rem',
-    borderRadius: '50%',
-    transition: 'all 0.2s'
+    padding: '2px',
+    fontSize: '16px',
+    borderRadius: '4px',
+    transition: 'all 0.2s',
+    opacity: 0.6,
+    width: '20px',
+    height: '20px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0
   };
 
   const handleCloseHover = (e) => {
-    e.target.style.backgroundColor = 'var(--color-border)';
+    e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+    e.target.style.opacity = '1';
   };
 
   const handleCloseLeave = (e) => {
     e.target.style.backgroundColor = 'transparent';
+    e.target.style.opacity = '0.6';
   };
 
   return (
@@ -164,11 +181,11 @@ const Toast = ({ toast, onClose }) => {
       <div style={headerStyles}>
         <div style={titleStyles}>
           <div style={iconStyles}>{typeIcons[toast.type]}</div>
-          {toast.title}
+          <span>{toast.title}</span>
         </div>
         <button
           style={closeButtonStyles}
-          onClick={onClose}
+          onClick={handleClose}
           onMouseEnter={handleCloseHover}
           onMouseLeave={handleCloseLeave}
         >

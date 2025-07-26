@@ -18,59 +18,95 @@ export const GlassButton = ({
     alignItems: 'center',
     justifyContent: 'center',
     fontWeight: '500',
-    borderRadius: 'var(--border-radius)',
-    border: '1px solid var(--color-border)',
-    backgroundColor: 'var(--color-surface)',
-    backdropFilter: `blur(var(--backdrop-blur))`,
-    WebkitBackdropFilter: `blur(var(--backdrop-blur))`,
-    color: 'var(--color-text)',
+    borderRadius: '12px',
+    border: 'none',
     cursor: disabled ? 'not-allowed' : 'pointer',
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     transform: 'translateY(0)',
-    boxShadow: `0 4px 6px -1px var(--color-shadow)`,
-    overflow: 'hidden'
+    outline: 'none',
+    fontFamily: 'inherit',
+    textDecoration: 'none',
+    userSelect: 'none',
+    opacity: disabled ? 0.5 : 1
   };
 
   const sizeStyles = {
-    sm: { padding: '0.5rem 1rem', fontSize: '0.875rem' },
-    md: { padding: '0.75rem 1.5rem', fontSize: '1rem' },
-    lg: { padding: '1rem 2rem', fontSize: '1.125rem' }
+    sm: { 
+      padding: '8px 16px', 
+      fontSize: '0.875rem',
+      minHeight: '36px'
+    },
+    md: { 
+      padding: '12px 24px', 
+      fontSize: '0.9375rem',
+      minHeight: '44px'
+    },
+    lg: { 
+      padding: '16px 32px', 
+      fontSize: '1rem',
+      minHeight: '52px'
+    }
   };
 
   const variantStyles = {
     primary: {
-      background: `linear-gradient(135deg, var(--color-primary), var(--color-secondary))`,
+      background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
       color: 'white',
-      boxShadow: `0 4px 15px rgba(99, 102, 241, 0.3)`
+      boxShadow: '0 2px 8px rgba(99, 102, 241, 0.2)',
+      ':hover': {
+        transform: 'translateY(-1px)',
+        boxShadow: '0 4px 16px rgba(99, 102, 241, 0.3)'
+      }
     },
     secondary: {
-      background: 'var(--color-surface)',
+      background: 'rgba(255, 255, 255, 0.05)',
       color: 'var(--color-text)',
-      border: '1px solid var(--color-border)'
+      border: '1px solid rgba(255, 255, 255, 0.1)',
+      backdropFilter: 'blur(10px)',
+      ':hover': {
+        background: 'rgba(255, 255, 255, 0.08)',
+        transform: 'translateY(-1px)'
+      }
     },
     accent: {
-      background: `linear-gradient(135deg, var(--color-accent), var(--color-primary))`,
+      background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
       color: 'white',
-      boxShadow: `0 4px 15px rgba(6, 182, 212, 0.3)`
+      boxShadow: '0 2px 8px rgba(6, 182, 212, 0.2)',
+      ':hover': {
+        transform: 'translateY(-1px)',
+        boxShadow: '0 4px 16px rgba(6, 182, 212, 0.3)'
+      }
+    },
+    ghost: {
+      background: 'transparent',
+      color: 'var(--color-text)',
+      ':hover': {
+        background: 'rgba(255, 255, 255, 0.05)'
+      }
     }
   };
 
   const handleMouseEnter = (e) => {
-    e.target.style.transform = 'translateY(-2px)';
-    e.target.style.boxShadow = `0 8px 25px ${variant === 'primary' ? 'rgba(99, 102, 241, 0.4)' : 'var(--color-shadow)'}`;
+    if (disabled) return;
+    const variant = variantStyles[variant];
+    if (variant[':hover']) {
+      Object.assign(e.target.style, variant[':hover']);
+    }
   };
 
   const handleMouseLeave = (e) => {
+    if (disabled) return;
     e.target.style.transform = 'translateY(0)';
-    e.target.style.boxShadow = variant === 'primary' ? '0 4px 15px rgba(99, 102, 241, 0.3)' : '0 4px 6px -1px var(--color-shadow)';
-  };
-
-  const handleMouseDown = (e) => {
-    e.target.style.transform = 'translateY(1px)';
-  };
-
-  const handleMouseUp = (e) => {
-    e.target.style.transform = 'translateY(-2px)';
+    
+    if (variant === 'primary') {
+      e.target.style.boxShadow = '0 2px 8px rgba(99, 102, 241, 0.2)';
+    } else if (variant === 'accent') {
+      e.target.style.boxShadow = '0 2px 8px rgba(6, 182, 212, 0.2)';
+    } else if (variant === 'secondary') {
+      e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+    } else if (variant === 'ghost') {
+      e.target.style.background = 'transparent';
+    }
   };
 
   return (
@@ -78,34 +114,16 @@ export const GlassButton = ({
       style={{
         ...baseStyles,
         ...sizeStyles[size],
-        ...variantStyles[variant],
-        opacity: disabled ? 0.6 : 1
+        ...variantStyles[variant]
       }}
       className={className}
       onClick={onClick}
       disabled={disabled}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
       {...props}
     >
-      <span className="relative z-10">{children}</span>
-      {!disabled && (
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent)',
-            transform: 'translateX(-100%)',
-            transition: 'transform 0.6s'
-          }}
-          className="shimmer"
-        />
-      )}
+      {children}
     </button>
   );
 };
