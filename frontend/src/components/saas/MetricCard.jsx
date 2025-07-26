@@ -92,8 +92,7 @@ export const MetricCard = ({
     fontWeight: '700',
     color: 'var(--color-text)',
     lineHeight: '1.1',
-    marginBottom: '16px',
-    textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+    marginBottom: '16px'
   };
 
   const changeContainerStyles = {
