@@ -88,8 +88,9 @@ export const GlassButton = ({
 
   const handleMouseEnter = (e) => {
     if (disabled) return;
-    const variantStyle = variantStyles[variant];
-    if (variantStyle[':hover']) {
+    const currentVariant = variant;
+    const variantStyle = variantStyles[currentVariant];
+    if (variantStyle && variantStyle[':hover']) {
       Object.assign(e.target.style, variantStyle[':hover']);
     }
   };
@@ -98,13 +99,14 @@ export const GlassButton = ({
     if (disabled) return;
     e.target.style.transform = 'translateY(0)';
     
-    if (variant === 'primary') {
+    const currentVariant = variant;
+    if (currentVariant === 'primary') {
       e.target.style.boxShadow = '0 2px 8px rgba(99, 102, 241, 0.2)';
-    } else if (variant === 'accent') {
+    } else if (currentVariant === 'accent') {
       e.target.style.boxShadow = '0 2px 8px rgba(6, 182, 212, 0.2)';
-    } else if (variant === 'secondary') {
+    } else if (currentVariant === 'secondary') {
       e.target.style.background = 'rgba(255, 255, 255, 0.05)';
-    } else if (variant === 'ghost') {
+    } else if (currentVariant === 'ghost') {
       e.target.style.background = 'transparent';
     }
   };
