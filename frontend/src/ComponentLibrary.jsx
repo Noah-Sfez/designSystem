@@ -65,6 +65,7 @@ const ComponentLibrary = () => {
     background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
     marginBottom: '16px',
     lineHeight: '1.2'
   };
@@ -77,45 +78,12 @@ const ComponentLibrary = () => {
     lineHeight: '1.6'
   };
 
-  const navigationStyles = {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '12px',
-    marginBottom: '48px',
-    flexWrap: 'wrap'
-  };
-
-  const contentStyles = {
-    maxWidth: '1200px',
-    margin: '0 auto'
-  };
-
-  const sectionStyles = {
-    marginBottom: '64px'
-  };
-
   const sectionTitleStyles = {
     fontSize: '2rem',
     fontWeight: '600',
     color: 'var(--color-text)',
     marginBottom: '32px',
     textAlign: 'center'
-  };
-
-  const gridStyles = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-    gap: '24px',
-    marginBottom: '32px'
-  };
-
-  const demoCardStyles = {
-    padding: '32px',
-    textAlign: 'center',
-    minHeight: '200px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center'
   };
 
   const demoTitleStyles = {
