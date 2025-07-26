@@ -276,30 +276,55 @@ const ComponentLibrary = () => {
           </pre>
         </GlassCard>
 
-        {/* Toasts */}
+        {/* Badges */}
         <GlassCard style={demoCardStyles}>
-          <h3 style={demoTitleStyles}>Notifications</h3>
+          <h3 style={demoTitleStyles}>Badges</h3>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '16px' }}>
+            <Badge variant="default" size="sm">Default</Badge>
+            <Badge variant="success" size="sm" dot>Success</Badge>
+            <Badge variant="warning" size="md" icon="⚠">Warning</Badge>
+            <Badge variant="danger" size="md" pulse>Danger</Badge>
+            <Badge variant="info" size="lg" removable onRemove={() => {}}>Removable</Badge>
+          </div>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <GlassButton variant="primary" size="sm" onClick={() => handleToastDemo('success')}>
-              Succès
-            </GlassButton>
-            <GlassButton variant="secondary" size="sm" onClick={() => handleToastDemo('error')}>
-              Erreur
-            </GlassButton>
-            <GlassButton variant="accent" size="sm" onClick={() => handleToastDemo('warning')}>
-              Attention
-            </GlassButton>
-            <GlassButton variant="ghost" size="sm" onClick={() => handleToastDemo('info')}>
-              Info
-            </GlassButton>
+            <Badge variant="default" outline>Outline</Badge>
+            <Badge variant="success" outline dot pulse>Outline + Dot</Badge>
           </div>
           <pre style={codeBlockStyles}>
-{`const { toast } = useToast();
+{`<Badge variant="success" size="sm" dot>Success</Badge>
+<Badge variant="warning" icon="⚠">Warning</Badge>
+<Badge variant="danger" pulse>Danger</Badge>
+<Badge variant="info" removable onRemove={() => {}}>Removable</Badge>`}
+          </pre>
+        </GlassCard>
 
-toast.success('Opération réussie', 'Message de succès');
-toast.error('Erreur détectée', 'Message d\'erreur');
-toast.warning('Attention', 'Message d\'avertissement');
-toast.info('Information', 'Message d\'information');`}
+        {/* Progress Bars */}
+        <GlassCard style={demoCardStyles}>
+          <h3 style={demoTitleStyles}>Barres de Progression</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', textAlign: 'left' }}>
+            {progressData.map((progress, index) => (
+              <ProgressBar
+                key={index}
+                label={progress.label}
+                value={progress.value}
+                color={progress.color}
+                size={progress.size}
+                striped={progress.striped}
+                animated={progress.animated}
+                glowing={progress.glowing}
+                showPercentage={true}
+              />
+            ))}
+          </div>
+          <pre style={codeBlockStyles}>
+{`<ProgressBar 
+  label="Développement Frontend" 
+  value={87} 
+  color="primary" 
+  striped 
+  animated 
+  showPercentage 
+/>`}
           </pre>
         </GlassCard>
       </div>
