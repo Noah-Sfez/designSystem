@@ -129,28 +129,36 @@ export const metricsData = [
     value: '12,547',
     change: '+12.5%',
     icon: '👥',
-    trend: 'up'
+    trend: 'up',
+    category: 'success',
+    sparklineData: [8500, 9200, 8800, 10200, 11500, 12200, 11800, 12800, 12100, 13200, 12800, 12547]
   },
   {
     title: 'Chiffre d\'Affaires',
     value: '89,650€',
     change: '+8.2%',
     icon: '💰',
-    trend: 'up'
+    trend: 'up',
+    category: 'default',
+    sparklineData: [72000, 75000, 71000, 78000, 82000, 85000, 83000, 87000, 86000, 91000, 88000, 89650]
   },
   {
     title: 'Taux de Conversion',
     value: '3.2%',
     change: '-0.5%',
     icon: '📈',
-    trend: 'down'
+    trend: 'down',
+    category: 'warning',
+    sparklineData: [2.8, 3.1, 2.9, 3.3, 3.5, 3.4, 3.2, 3.6, 3.1, 3.4, 3.3, 3.2]
   },
   {
     title: 'Satisfaction Client',
     value: '4.8/5',
     change: '+0.2',
     icon: '⭐',
-    trend: 'up'
+    trend: 'up',
+    category: 'success',
+    sparklineData: [4.5, 4.6, 4.4, 4.7, 4.8, 4.7, 4.6, 4.9, 4.8, 4.7, 4.8, 4.8]
   }
 ];
 
@@ -273,5 +281,134 @@ export const tableColumns = [
         {value}€
       </span>
     )
+  }
+];
+
+export const statsData = [
+  {
+    title: 'Revenus Totaux',
+    value: 89650,
+    previousValue: 82340,
+    icon: '💰',
+    color: 'success',
+    format: 'currency',
+    subtitle: 'Revenus générés ce mois'
+  },
+  {
+    title: 'Utilisateurs Actifs',
+    value: 12547,
+    previousValue: 11230,
+    icon: '👥',
+    color: 'primary',
+    format: 'number',
+    subtitle: 'Utilisateurs connectés dans les 30 derniers jours'
+  },
+  {
+    title: 'Taux de Conversion',
+    value: 3.2,
+    previousValue: 3.7,
+    icon: '📈',
+    color: 'warning',
+    format: 'percentage',
+    subtitle: 'Conversions visiteurs en clients'
+  },
+  {
+    title: 'Satisfaction Client',
+    value: 4.8,
+    previousValue: 4.6,
+    icon: '⭐',
+    color: 'info',
+    format: 'number',
+    subtitle: 'Note moyenne sur 5'
+  }
+];
+
+export const timelineData = [
+  {
+    title: 'Lancement de la v2.0',
+    description: 'Déploiement réussi de la nouvelle version avec interface redesignée',
+    time: '10:30',
+    status: 'completed',
+    icon: '🚀',
+    color: '#10b981'
+  },
+  {
+    title: 'Migration base de données',
+    description: 'Migration en cours vers la nouvelle infrastructure cloud',
+    time: '14:15',
+    status: 'active',
+    icon: '🔄',
+    color: '#6366f1'
+  },
+  {
+    title: 'Formation équipe',
+    description: 'Session de formation sur les nouvelles fonctionnalités',
+    time: '16:00',
+    status: 'pending',
+    icon: '🎓',
+    color: '#f59e0b'
+  },
+  {
+    title: 'Maintenance serveur',
+    description: 'Maintenance programmée des serveurs de production',
+    time: '22:00',
+    status: 'pending',
+    icon: '🔧',
+    color: '#6b7280'
+  }
+];
+
+export const userProfileData = {
+  name: 'Marie Dubois',
+  email: 'marie.dubois@example.com',
+  role: 'Lead Developer',
+  status: 'online',
+  verified: true,
+  joinDate: '2022-03-15',
+  location: 'Lyon, France',
+  bio: 'Développeuse senior spécialisée en React et Node.js. Passionnée par l\'UX et les nouvelles technologies. Mentor pour les développeurs juniors.',
+  stats: {
+    projects: 42,
+    contributions: 1247,
+    followers: 2840
+  },
+  badges: ['Pro', 'Verified', 'Top Contributor', 'Mentor'],
+  socialLinks: {
+    twitter: '@mariedubois',
+    linkedin: 'marie-dubois-dev',
+    github: 'mariedubois'
+  }
+};
+
+export const progressData = [
+  {
+    label: 'Développement Frontend',
+    value: 87,
+    color: 'primary',
+    size: 'md',
+    striped: true,
+    animated: true
+  },
+  {
+    label: 'Tests Unitaires',
+    value: 65,
+    color: 'warning',
+    size: 'md',
+    glowing: true
+  },
+  {
+    label: 'Documentation',
+    value: 42,
+    color: 'danger',
+    size: 'lg',
+    animated: true
+  },
+  {
+    label: 'Déploiement',
+    value: 95,
+    color: 'success',
+    size: 'md',
+    striped: true,
+    glowing: true
   }
 ];
