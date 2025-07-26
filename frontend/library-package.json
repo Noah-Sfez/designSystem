@@ -1,0 +1,52 @@
+{
+  "name": "@votre-nom/react-glass-components",
+  "version": "1.0.0",
+  "description": "Librairie moderne de composants React avec design glassmorphism et système de thèmes",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "glassmorphism",
+    "saas",
+    "design-system",
+    "typescript"
+  ],
+  "author": "Votre Nom <votre@email.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/votre-nom/react-glass-components"
+  },
+  "bugs": {
+    "url": "https://github.com/votre-nom/react-glass-components/issues"
+  },
+  "homepage": "https://votre-nom.github.io/react-glass-components",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "rollup": "^3.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "typescript": "^4.9.0"
+  }
+}
