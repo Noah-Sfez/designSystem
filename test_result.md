@@ -101,3 +101,48 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Convertir tous les fichiers de configuration de déploiement pour utiliser npm au lieu de yarn"
+
+backend:
+  - task: "Backend components working"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Backend FastAPI server functioning correctly"
+
+frontend:
+  - task: "Convert deployment configuration from yarn to npm"
+    implemented: false
+    working: "NA"
+    file: "DEPLOYMENT.md, package.json, README-LIBRARY.md"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Need to update all yarn commands to use npm instead"
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 0
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Convert deployment configuration from yarn to npm"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Starting conversion of all yarn commands to npm in deployment configuration files"
